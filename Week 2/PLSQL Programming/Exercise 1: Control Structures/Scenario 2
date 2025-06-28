@@ -1,0 +1,17 @@
+DECLARE
+    CURSOR customer_cursor IS
+        SELECT customer_id, balance
+        FROM Customers;
+BEGIN
+    FOR customer_rec IN customer_cursor LOOP
+        IF customer_rec.balance > 10000 THEN
+            UPDATE Customers
+            SET is_vip = 'Y'
+            WHERE customer_id = customer_rec.customer_id;
+            IF SQL%ROWCOUNT > 0 THEN
+                DBMS_OUTPUT.PUT_LINE('Promoted customer ID: ' || customer_rec.customer_id || ' to VIP status');
+            END IF;
+        END IF;
+    END LOOP;    
+    COMMIT;
+END;
