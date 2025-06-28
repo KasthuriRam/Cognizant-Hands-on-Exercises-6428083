@@ -1,0 +1,33 @@
+CREATE TABLE Customers (
+    customer_id NUMBER PRIMARY KEY,
+    name VARCHAR2(100),
+    date_of_birth DATE,
+    balance NUMBER(12,2),
+    is_vip CHAR(1) DEFAULT 'N'
+);
+
+CREATE TABLE Loans (
+    loan_id NUMBER PRIMARY KEY,
+    customer_id NUMBER,
+    interest_rate NUMBER(5,2),
+    due_date DATE,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+
+INSERT INTO Customers (customer_id, name, date_of_birth, balance, is_vip) VALUES
+(101, 'Monkey D. Luffy', TO_DATE('1950-05-15', 'YYYY-MM-DD'), 5000, 'N');
+INSERT INTO Customers (customer_id, name, date_of_birth, balance, is_vip) VALUES
+(102, 'Roronoa Zoro', TO_DATE('1975-08-20', 'YYYY-MM-DD'), 15000, 'N');
+INSERT INTO Customers (customer_id, name, date_of_birth, balance, is_vip) VALUES
+(103, 'WhiteBeard', TO_DATE('1945-03-10', 'YYYY-MM-DD'), 8000, 'N');
+INSERT INTO Customers (customer_id, name, date_of_birth, balance, is_vip) VALUES
+(104, 'Shanks', TO_DATE('1980-11-25', 'YYYY-MM-DD'), 12000, 'N');
+
+INSERT INTO Loans (loan_id, customer_id, interest_rate, due_date) VALUES
+(201, 101, 5.5, TO_DATE('2025-07-15', 'YYYY-MM-DD'));
+INSERT INTO Loans (loan_id, customer_id, interest_rate, due_date) VALUES
+(202, 102, 4.0, TO_DATE('2025-07-20', 'YYYY-MM-DD'));
+INSERT INTO Loans (loan_id, customer_id, interest_rate, due_date) VALUES
+(203, 103, 6.0, TO_DATE('2025-07-25', 'YYYY-MM-DD'));
+INSERT INTO Loans (loan_id, customer_id, interest_rate, due_date) VALUES
+(204, 104, 3.5, TO_DATE('2025-08-10', 'YYYY-MM-DD'));
